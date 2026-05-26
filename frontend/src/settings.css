@@ -1,0 +1,23 @@
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .settings-grid { grid-template-columns: 1fr; }
+}
+
+.card-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.settings-form { display: flex; flex-direction: column; gap: 1rem; }
+
+.danger-zone { border-color: rgba(239,68,68,0.3); }
+.danger-title { color: var(--color-danger); }
+.danger-desc { font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1rem; }
