@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# environment
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+logs/
+npm-debug.log*
+
+# os
+.DS_Store
+
+# ide
+.vscode/
+.idea/
+
+# test coverage
+coverage/
