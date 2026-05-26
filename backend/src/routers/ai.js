@@ -67,15 +67,27 @@ ${schemaContext}
 ${relationships ? `Relationships:\n${relationships}\n` : ''}
 Question: ${question}`;
 
-    const result = await model.generateContent(prompt);
-    let sql = result.response.text().trim();
-    sql = sql.replace(/^```sql\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
+    let sql;
+    try {
+      const result = await model.generateContent(prompt);
+      sql = result.response.text().trim();
+    } catch (aiErr) {
+      const msg = aiErr.message || '';
+      if (msg.includes('API_KEY_INVALID') || msg.includes('INVALID_ARGUMENT') || aiErr.status === 400) {
+        return res.status(400).json({ error: 'Invalid Gemini API key — check it in Account Settings.', invalidKey: true });
+      }
+      if (msg.includes('429') || msg.includes('RESOURCE_EXHAUSTED') || msg.includes('quota') || aiErr.status === 429) {
+        return res.status(429).json({
+          error: 'Gemini quota exceeded — free tier resets daily. Visit aistudio.google.com to upgrade or try again later.',
+          quotaExceeded: true,
+        });
+      }
+      throw aiErr;
+    }
 
+    sql = sql.replace(/^```sql\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
     res.json({ sql, question });
   } catch (err) {
-    if (err.message?.includes('API_KEY_INVALID') || err.status === 400) {
-      return res.status(400).json({ error: 'Invalid Gemini API key. Check your key in Account Settings.' });
-    }
     next(err);
   }
 });

@@ -9,8 +9,8 @@ export const getSnapshot = (id) =>
 export const saveSnapshot = (data) =>
   client.post('/api/snapshots', data);
 
-export const renameSnapshot = (id, name) =>
-  client.put(`/api/snapshots/${id}`, { name });
+export const renameSnapshot = (id, name, description) =>
+  client.put(`/api/snapshots/${id}`, { name, description });
 
 export const deleteSnapshot = (id) =>
   client.delete(`/api/snapshots/${id}`);

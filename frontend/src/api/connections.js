@@ -1,8 +1,10 @@
 import client from './api-client';
 
-export const uploadFile = (file) => {
+export const uploadFiles = (files) => {
   const form = new FormData();
-  form.append('file', file);
+  for (const f of files) form.append('files', f);
   return client.post('/api/connect/upload', form);
 };
 
+// Legacy single-file alias
+export const uploadFile = (file) => uploadFiles([file]);

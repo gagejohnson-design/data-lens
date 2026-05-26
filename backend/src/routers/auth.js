@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const pool = require('../db');
 const { authLimiter } = require('../middleware/rateLimiter');
@@ -110,6 +111,64 @@ router.post('/refresh', async (req, res) => {
 router.post('/logout', (req, res) => {
   res.clearCookie('refreshToken');
   res.json({ message: 'Logged out' });
+});
+
+// POST /api/auth/forgot-password
+router.post('/forgot-password', authLimiter, async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email is required' });
+
+    const { rows: [user] } = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
+
+    // Always respond with success to prevent email enumeration
+    if (!user) return res.json({ sent: true });
+
+    const token = crypto.randomBytes(32).toString('hex');
+    const expires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+    await pool.query(
+      'UPDATE users SET reset_token = $1, reset_token_expires = $2 WHERE id = $3',
+      [token, expires, user.id]
+    );
+
+    const origin = process.env.CORS_ORIGIN || 'http://localhost:5173';
+    const resetLink = `${origin}/reset-password?token=${token}`;
+
+    // In production, send an email here. For now, return the link in dev.
+    const isDev = process.env.NODE_ENV !== 'production';
+    res.json({ sent: true, ...(isDev && { resetLink }) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/auth/reset-password
+router.post('/reset-password', authLimiter, async (req, res, next) => {
+  try {
+    const { token, password } = req.body;
+    if (!token || !password) return res.status(400).json({ error: 'token and password are required' });
+    if (typeof password !== 'string' || password.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters' });
+    }
+
+    const { rows: [user] } = await pool.query(
+      'SELECT id FROM users WHERE reset_token = $1 AND reset_token_expires > NOW()',
+      [token]
+    );
+
+    if (!user) return res.status(400).json({ error: 'Reset link is invalid or has expired' });
+
+    const hash = await bcrypt.hash(password, 12);
+    await pool.query(
+      'UPDATE users SET password_hash = $1, reset_token = NULL, reset_token_expires = NULL, failed_login_attempts = 0, locked_until = NULL WHERE id = $2',
+      [hash, user.id]
+    );
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (err) {
+    next(err);
+  }
 });
 
 module.exports = router;

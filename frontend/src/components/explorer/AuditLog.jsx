@@ -8,6 +8,17 @@ const ACTION_LABELS = {
   exported: 'Exported',
 };
 
+function timeAgo(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  if (h < 24 * 7) return `${Math.floor(h / 24)}d ago`;
+  return new Date(iso).toLocaleDateString();
+}
+
 const cache = { data: null };
 
 export default function AuditLog() {
@@ -44,7 +55,9 @@ export default function AuditLog() {
             <tr key={e.id}>
               <td><span className={`action-badge action-${e.action}`}>{ACTION_LABELS[e.action] || e.action}</span></td>
               <td className="col-name-cell">{e.snapshot_name || '—'}</td>
-              <td style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem' }}>{new Date(e.created_at).toLocaleString()}</td>
+              <td style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem' }} title={new Date(e.created_at).toLocaleString()}>
+                {timeAgo(e.created_at)}
+              </td>
             </tr>
           ))}
         </tbody>

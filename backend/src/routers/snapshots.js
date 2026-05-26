@@ -14,7 +14,7 @@ function hashSnapshot(data) {
 router.get('/', requireAuth, async (req, res, next) => {
   try {
     const { rows } = await pool.query(
-      `SELECT id, name, source_type, hash, created_at, updated_at
+      `SELECT id, name, description, source_type, hash, created_at, updated_at
        FROM snapshots WHERE user_id = $1 ORDER BY created_at DESC`,
       [req.userId]
     );
@@ -62,7 +62,7 @@ router.get('/:id/export', requireAuth, async (req, res, next) => {
 // POST /api/snapshots
 router.post('/', requireAuth, async (req, res, next) => {
   try {
-    const { name, source_type, snapshot_data } = req.body;
+    const { name, description, source_type, snapshot_data } = req.body;
     if (!name || !source_type || !snapshot_data) {
       return res.status(400).json({ error: 'name, source_type, and snapshot_data are required' });
     }
@@ -85,9 +85,9 @@ router.post('/', requireAuth, async (req, res, next) => {
 
     const hash = hashSnapshot(snapshot_data);
     const { rows: [snapshot] } = await pool.query(
-      `INSERT INTO snapshots (user_id, name, source_type, snapshot_data, hash)
-       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [req.userId, name, source_type, JSON.stringify(snapshot_data), hash]
+      `INSERT INTO snapshots (user_id, name, description, source_type, snapshot_data, hash)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [req.userId, name, description || null, source_type, JSON.stringify(snapshot_data), hash]
     );
 
     await pool.query(
@@ -105,14 +105,14 @@ router.post('/', requireAuth, async (req, res, next) => {
 // PUT /api/snapshots/:id
 router.put('/:id', requireAuth, async (req, res, next) => {
   try {
-    const { name } = req.body;
+    const { name, description } = req.body;
     if (!name) return res.status(400).json({ error: 'name is required' });
 
     const { rows: [snapshot] } = await pool.query(
-      `UPDATE snapshots SET name = $1, updated_at = NOW()
-       WHERE id = $2 AND user_id = $3
-       RETURNING id, name, updated_at`,
-      [name, req.params.id, req.userId]
+      `UPDATE snapshots SET name = $1, description = COALESCE($2, description), updated_at = NOW()
+       WHERE id = $3 AND user_id = $4
+       RETURNING id, name, description, updated_at`,
+      [name, description !== undefined ? (description || null) : undefined, req.params.id, req.userId]
     );
     if (!snapshot) return res.status(404).json({ error: 'Snapshot not found' });
     res.json(snapshot);

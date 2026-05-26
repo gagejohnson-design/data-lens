@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/common/NavBar';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import { updateMe, updatePassword, deleteAccount, getAiKeyStatus, saveAiKey } from '../api/users';
 
 export default function AccountSettingsPage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
@@ -23,6 +25,8 @@ export default function AccountSettingsPage() {
   }, []);
 
   const notify = (msg, isError = false) => {
+    toast(msg, isError ? 'error' : 'success');
+    // Keep inline alerts for accessibility too
     if (isError) { setError(msg); setMessage(null); }
     else { setMessage(msg); setError(null); }
     setTimeout(() => { setError(null); setMessage(null); }, 4000);
@@ -137,7 +141,12 @@ export default function AccountSettingsPage() {
               </a>.
             </p>
             {hasAiKey && (
-              <p className="settings-key-status">API key configured</p>
+              <div className="settings-key-status-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                API key configured
+              </div>
             )}
             <form className="settings-form" onSubmit={handleAiKeySave} style={{ marginTop: '1rem' }}>
               <div className="field">
@@ -164,6 +173,21 @@ export default function AccountSettingsPage() {
                 )}
               </div>
             </form>
+          </div>
+
+          <div className="card">
+            <h2 className="card-section-title">App Preferences</h2>
+            <p className="settings-desc">Reset the onboarding tour to see the welcome walkthrough again.</p>
+            <button
+              className="btn btn-secondary"
+              style={{ marginTop: '0.5rem' }}
+              onClick={() => {
+                localStorage.removeItem('datalens_toured');
+                notify('Tour will show on next page load');
+              }}
+            >
+              Reset Onboarding Tour
+            </button>
           </div>
 
           <div className="card danger-zone">

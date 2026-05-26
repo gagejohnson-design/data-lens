@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const justReset = searchParams.get('reset') === '1';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -16,7 +18,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate('/');
+      navigate('/hub');
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     } finally {
@@ -80,6 +82,11 @@ export default function LoginPage() {
           <h1>Welcome back</h1>
           <p className="auth-subtitle">Sign in to explore your data.</p>
 
+          {justReset && (
+            <div className="alert alert-success" style={{ marginBottom: '1.25rem' }}>
+              Password updated — sign in with your new password.
+            </div>
+          )}
           <form className="auth-form" onSubmit={handleSubmit}>
             <div className="field">
               <label htmlFor="email">Email</label>
@@ -95,7 +102,10 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="auth-footer">No account? <Link to="/register">Create one</Link></p>
+          <div className="auth-footer" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+            <span>No account? <Link to="/register">Create one</Link></span>
+            <Link to="/forgot-password" style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>Forgot password?</Link>
+          </div>
         </div>
       </div>
     </div>

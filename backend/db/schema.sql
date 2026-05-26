@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS users (
   failed_login_attempts  INTEGER DEFAULT 0,
   locked_until           TIMESTAMP,
   gemini_api_key         TEXT,
+  reset_token            TEXT,
+  reset_token_expires    TIMESTAMPTZ,
   created_at             TIMESTAMP DEFAULT NOW(),
   updated_at             TIMESTAMP DEFAULT NOW()
 );
@@ -16,7 +18,8 @@ CREATE TABLE IF NOT EXISTS snapshots (
   id             SERIAL PRIMARY KEY,
   user_id        INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   name           VARCHAR(255) NOT NULL,
-  source_type    VARCHAR(50) NOT NULL CHECK (source_type IN ('csv', 'json')),
+  description    TEXT,
+  source_type    VARCHAR(50) NOT NULL CHECK (source_type IN ('csv', 'json', 'mixed')),
   snapshot_data  JSONB NOT NULL,
   hash           TEXT NOT NULL,
   share_token    UUID UNIQUE,

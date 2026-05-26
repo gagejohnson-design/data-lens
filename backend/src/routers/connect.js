@@ -7,14 +7,6 @@ const { parseCSV, parseExcel } = require('../adapters/csv');
 
 const router = express.Router();
 
-const ALLOWED_MIMES = new Set([
-  'text/csv',
-  'text/plain',
-  'application/json',
-  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  'application/vnd.ms-excel',
-]);
-
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 },
@@ -25,52 +17,62 @@ const upload = multer({
   },
 });
 
-// POST /api/connect/upload
-router.post('/upload', requireAuth, uploadLimiter, upload.single('file'), async (req, res, next) => {
+function parseFile(file) {
+  const ext = file.originalname.split('.').pop().toLowerCase();
+  if (ext === 'csv') {
+    return { tables: parseCSV(file.buffer, file.originalname), source_type: 'csv' };
+  }
+  if (['xlsx', 'xls'].includes(ext)) {
+    return { tables: parseExcel(file.buffer), source_type: 'csv' };
+  }
+  if (ext === 'json') {
+    const parsed = JSON.parse(file.buffer.toString());
+    const raw = Array.isArray(parsed)
+      ? parsed
+      : Object.values(parsed).find((v) => Array.isArray(v)) ?? [parsed];
+    if (!Array.isArray(raw) || raw.length === 0)
+      throw new Error('JSON must contain an array of objects');
+    const columns = Object.keys(raw[0]).map((key) => ({
+      name: key,
+      type: typeof raw[0][key] === 'number' ? 'number' : typeof raw[0][key] === 'boolean' ? 'boolean' : 'string',
+      nullable: raw.some((row) => row[key] == null),
+      null_percent: +((raw.filter((row) => row[key] == null).length / raw.length) * 100).toFixed(1),
+    }));
+    return {
+      tables: [{
+        name: file.originalname.replace(/\.json$/i, ''),
+        row_count: raw.length,
+        duplicate_count: 0,
+        columns,
+        sample_rows: raw.slice(0, 10),
+      }],
+      source_type: 'json',
+    };
+  }
+  throw new Error('Unsupported file type');
+}
+
+// POST /api/connect/upload — accepts one or multiple files
+router.post('/upload', requireAuth, uploadLimiter, upload.array('files', 10), async (req, res, next) => {
   try {
-    const { file } = req;
-    if (!file) return res.status(400).json({ error: 'No file provided' });
+    const files = req.files;
+    if (!files || files.length === 0) return res.status(400).json({ error: 'No files provided' });
 
-    const ext = file.originalname.split('.').pop().toLowerCase();
-    let tables;
-    let source_type;
+    const allTables = [];
+    const types = new Set();
 
-    if (ext === 'csv') {
-      tables = parseCSV(file.buffer, file.originalname);
-      source_type = 'csv';
-    } else if (['xlsx', 'xls'].includes(ext)) {
-      tables = parseExcel(file.buffer);
-      source_type = 'csv';
-    } else if (ext === 'json') {
+    for (const file of files) {
       try {
-        const parsed = JSON.parse(file.buffer.toString());
-        const raw = Array.isArray(parsed)
-          ? parsed
-          : Object.values(parsed).find((v) => Array.isArray(v)) ?? [parsed];
-        if (!Array.isArray(raw) || raw.length === 0)
-          throw new Error('JSON must contain an array of objects');
-        const columns = Object.keys(raw[0]).map((key) => ({
-          name: key,
-          type: typeof raw[0][key] === 'number' ? 'number' : typeof raw[0][key] === 'boolean' ? 'boolean' : 'string',
-          nullable: raw.some((row) => row[key] == null),
-          null_percent: +((raw.filter((row) => row[key] == null).length / raw.length) * 100).toFixed(1),
-        }));
-        tables = [{
-          name: file.originalname.replace(/\.json$/i, ''),
-          row_count: raw.length,
-          duplicate_count: 0,
-          columns,
-          sample_rows: raw.slice(0, 10),
-        }];
-        source_type = 'json';
+        const { tables, source_type } = parseFile(file);
+        allTables.push(...tables);
+        types.add(source_type);
       } catch (e) {
-        return res.status(400).json({ error: 'Invalid JSON: ' + e.message });
+        return res.status(400).json({ error: `Error parsing "${file.originalname}": ${e.message}` });
       }
-    } else {
-      return res.status(400).json({ error: 'Only CSV, Excel (.xlsx/.xls), and JSON files are supported' });
     }
 
-    res.json({ tables, relationships: [], source_type });
+    const source_type = types.size === 1 ? [...types][0] : 'mixed';
+    res.json({ tables: allTables, relationships: [], source_type });
   } catch (err) { next(err); }
 });
 

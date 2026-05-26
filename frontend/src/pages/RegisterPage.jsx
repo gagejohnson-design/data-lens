@@ -17,7 +17,7 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       await register(name, email, password);
-      navigate('/');
+      navigate('/hub');
     } catch (err) {
       setError(err.response?.data?.error || 'Registration failed');
     } finally {

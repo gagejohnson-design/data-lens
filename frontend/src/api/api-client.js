@@ -17,6 +17,7 @@ client.interceptors.response.use(
   (res) => res,
   async (err) => {
     const original = err.config;
+
     if (err.response?.status === 401 && !original._retry) {
       original._retry = true;
       try {
@@ -33,6 +34,15 @@ client.interceptors.response.use(
         window.location.href = '/login';
       }
     }
+
+    if (err.response?.status === 429 && !err.response?.data?.quotaExceeded) {
+      err.response.data = {
+        ...err.response.data,
+        error: err.response.data?.error || 'Too many requests — please slow down and try again in a moment.',
+        rateLimited: true,
+      };
+    }
+
     return Promise.reject(err);
   }
 );
