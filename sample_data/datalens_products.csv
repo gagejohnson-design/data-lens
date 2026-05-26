@@ -1,0 +1,61 @@
+product_id,product_name,category,unit_price,cost_price,stock_qty,supplier_id,status,weight_kg,launch_date
+1,Eco Gadget 1,Electronics,602.01,1220.43,328,-9999,,22.06,2023-03-13
+2,Elite Device 2,Clothing,205.43,885.18,493,5,Active,36.09,2023-08-07
+3,Pro Suite 3,Books,381.35,969.96,406,16,Discontinued,26.46,2022-01-25
+4,Ultra Bundle 4,Food & Beverage,734.0,1144.56,-9999,-9999,Draft,47.44,2024-03-26
+5,Eco Bundle 5,Books,1282.87,-9999,40,7,Discontinued,31.75,2022-05-16
+6,N/A,Software,871.79,914.03,379,6,Discontinued,,2023-12-12
+7,Basic Tool 7,Books,1747.55,178.85,171,9,Draft,3.95,2024-07-21
+8,Elite Tool 8,Electronics,210.3,1084.72,,1,Active,9.03,2022-03-14
+9,Eco Bundle 9,Books,1832.13,1239.34,61,2,Active,3.54,2024-08-10
+10,Basic Gadget 10,,405.34,457.26,237,16,Discontinued,39.82,
+11,Pro Pack 11,Software,,503.86,192,10,Active,48.06,2022-10-19
+12,Pro Pack 12,Electronics,1403.19,-9999,48,-9999,N/A,6.62,2023-08-21
+13,Elite Kit 13,Food & Beverage,154.0,1170.35,79,15,Active,38.54,2024-07-14
+14,Pro Gadget 14,Food & Beverage,1653.64,62.41,167,8,Active,13.08,
+15,Elite Pack 15,Software,1588.65,94.38,113,13,Active,,
+16,Ultra Device 16,Electronics,1695.31,185.55,25,19,Active,21.39,2023-12-26
+17,Basic Suite 17,Clothing,1230.14,971.62,451,-9999,Active,,2024-12-12
+18,Pro Bundle 18,Furniture,1091.31,1369.19,198,1,,14.12,2024-08-24
+19,Ultra Tool 19,Furniture,536.72,,485,13,Discontinued,40.33,2024-01-05
+20,Eco Kit 20,Electronics,1128.4,1482.03,252,6,N/A,1.09,
+21,Ultra Tool 21,Furniture,1605.84,91.21,360,4,Draft,47.1,2024-03-21
+22,Basic Kit 22,Food & Beverage,1897.64,1441.07,89,18,Active,,2022-12-26
+23,Eco Suite 23,Books,1897.83,588.62,494,6,Active,46.84,2022-10-16
+24,Ultra Kit 24,Electronics,-9999,1064.03,453,1,Discontinued,39.37,N/A
+25,Eco Bundle 25,Software,988.7,-9999,245,19,Discontinued,,2022-03-10
+26,Basic Gadget 26,Food & Beverage,754.04,821.48,47,20,Active,30.41,2024-06-08
+27,Basic Pack 27,Electronics,1110.45,811.11,152,2,Active,,
+28,Basic Device 28,,345.81,124.74,157,16,Draft,9.33,2024-02-21
+29,Pro Suite 29,Software,1674.97,228.39,-9999,12,Active,27.72,2024-03-03
+30,Smart Device 30,Software,601.21,,292,19,Active,22.51,2022-12-09
+31,Ultra Widget 31,Clothing,873.61,941.58,132,-9999,Active,13.88,2024-07-27
+32,Eco Bundle 32,Electronics,1135.35,-9999,54,4,Active,13.28,2024-09-21
+33,Pro Tool 33,Software,1219.27,60.1,169,2,Draft,,2023-09-13
+34,Eco Gadget 34,Software,604.46,1161.5,373,3,Discontinued,24.27,2024-11-23
+35,Smart Tool 35,Electronics,809.75,787.38,88,7,N/A,,2024-01-09
+36,Basic Device 36,Food & Beverage,,559.96,90,16,Draft,13.01,2022-07-05
+37,Pro Tool 37,Software,432.57,339.22,333,1,Active,,2022-12-21
+38,Ultra Suite 38,Electronics,1426.92,414.52,436,9,Draft,19.92,
+39,Basic Suite 39,Books,132.35,961.61,133,10,Active,40.29,2024-04-07
+40,Ultra Widget 40,Books,522.56,,362,7,Discontinued,23.84,2024-01-05
+41,Eco Tool 41,Clothing,1483.13,839.43,484,11,Discontinued,15.42,2023-11-10
+42,Basic Device 42,Furniture,1733.45,-9999,455,4,Active,43.56,2022-11-05
+43,Basic Bundle 43,Clothing,1973.37,1293.87,41,6,,,2022-12-12
+44,Elite Gadget 44,Clothing,861.67,,273,12,Draft,0.99,2022-01-09
+45,Ultra Kit 45,Clothing,1009.16,,485,17,Draft,6.78,2024-09-30
+46,,Clothing,1969.83,34.83,63,2,Draft,29.74,2022-04-09
+47,Pro Widget 47,Books,763.61,712.65,355,1,Active,,2022-10-08
+48,Smart Gadget 48,Electronics,997.99,1167.38,498,14,Active,34.44,2024-09-11
+49,Pro Gadget 49,Electronics,1339.7,136.94,370,9,Active,,N/A
+50,Pro Suite 50,Clothing,854.86,1277.17,4,6,Active,,2022-07-10
+51,Ultra Gadget 51,Food & Beverage,547.31,1276.31,332,6,Active,5.28,2024-09-15
+52,Elite Tool 52,Books,1224.66,1320.17,456,16,Active,,
+53,Smart Pack 53,Books,679.91,-9999,338,16,Active,44.61,
+54,Smart Device 54,Clothing,154.36,362.86,25,18,Active,,2024-06-28
+55,Pro Device 55,Software,997.26,155.76,285,3,Active,28.16,2024-07-23
+56,Pro Pack 56,Food & Beverage,1536.0,1075.55,231,,Draft,14.67,2024-12-05
+57,Pro Tool 57,Electronics,1486.31,382.93,61,13,Discontinued,,N/A
+58,Eco Gadget 58,Books,1318.62,203.68,271,18,Active,46.07,2022-12-29
+59,Eco Tool 59,Clothing,1214.29,1322.32,311,8,Draft,6.76,2024-04-25
+60,Smart Suite 60,Books,631.25,831.27,107,10,Discontinued,47.92,2024-10-28
