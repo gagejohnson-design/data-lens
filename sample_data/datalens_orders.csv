@@ -1,0 +1,301 @@
+order_id,customer_id,product_id,order_date,quantity,unit_price,discount_pct,total_amount,status,payment_method,channel,shipping_days,notes
+1,83,49,2024-05-15,16,1885.63,,5821.62,Processing,PayPal,Mobile,5,Bulk order
+2,53,3,2024-03-07,15,1736.73,10,1888.73,Pending,Crypto,In-Store,,
+3,52,50,2023-02-07,15,1823.42,5,7105.26,Cancelled,PayPal,Email Campaign,,
+4,68,38,2022-04-15,1,1420.83,10,22911.35,Pending,Bank Transfer,Mobile,6,
+5,138,23,2022-01-19,7,665.48,15,36180.81,Processing,PayPal,In-Store,4,
+6,139,2,2023-01-30,12,1019.93,0,6704.12,Cancelled,Credit Card,Mobile,28,
+7,27,54,N/A,14,1879.8,,31770.65,,PayPal,Partner API,14,
+8,100,,2024-10-26,-9999,,10,11267.88,Completed,Crypto,Web,5,
+9,140,41,2022-01-11,12,27.24,20,37879.71,Pending,Bank Transfer,Email Campaign,20,Promo applied
+10,30,52,2022-05-30,2,1865.08,0,7904.73,Refunded,Bank Transfer,Mobile,29,
+11,125,40,2023-10-04,19,1135.89,5,25637.13,Refunded,Bank Transfer,In-Store,12,Duplicate??
+12,142,42,2022-06-06,9,284.3,0,25268.74,Cancelled,Crypto,Mobile,18,Duplicate??
+13,39,15,2024-01-16,19,585.54,5,32263.54,Processing,PayPal,Mobile,19,
+14,38,31,2023-02-28,2,-9999,15,36716.9,Cancelled,Credit Card,In-Store,21,Bulk order
+15,149,12,2023-04-02,13,1308.41,15,13807.84,Processing,Credit Card,Mobile,17,
+16,55,11,2024-09-07,4,832.15,0,16441.86,Completed,PayPal,Mobile,29,
+17,15,60,2023-03-20,13,,25,6830.97,Cancelled,PayPal,Mobile,6,
+18,88,39,2024-10-29,8,,0,7105.11,Processing,Credit Card,Email Campaign,,
+19,34,35,2024-09-14,14,,20,32186.8,Processing,Credit Card,In-Store,28,
+20,140,,2023-10-09,1,,0,26066.52,Pending,Crypto,Email Campaign,25,
+21,142,31,2024-03-26,18,511.29,0,17869.33,Cancelled,PayPal,Email Campaign,18,
+22,14,,2023-03-31,3,945.98,0,37228.09,N/A,Bank Transfer,N/A,6,
+23,,55,2022-12-14,17,72.05,15,21.49,Processing,Bank Transfer,In-Store,7,
+24,18,36,2023-02-03,18,699.45,20,10451.69,Cancelled,Credit Card,Email Campaign,26,
+25,66,53,2024-07-28,9,1932.28,0,10320.21,Pending,PayPal,Mobile,12,
+26,3,17,2024-09-02,3,1498.83,5,10770.34,Processing,PayPal,Mobile,9,
+27,52,54,2022-03-28,5,-9999,15,19698.69,Refunded,Bank Transfer,Email Campaign,19,
+28,135,31,2022-09-04,2,790.47,25,346.66,Pending,Crypto,In-Store,6,
+29,61,40,2024-03-31,6,425.01,0,39171.11,Cancelled,Credit Card,Mobile,7,
+30,39,1,2024-09-23,16,1787.07,0,-9999,Processing,Bank Transfer,Web,12,
+31,143,17,2022-12-24,14,1735.4,10,26930.98,Pending,Crypto,Partner API,5,VIP customer
+32,108,37,2024-03-20,3,690.53,25,37551.41,Cancelled,Crypto,Mobile,,
+33,65,45,2022-02-23,7,-9999,-9999,-9999,Refunded,Crypto,Mobile,5,
+34,-9999,43,2022-10-04,11,937.05,0,18267.17,Cancelled,Crypto,Email Campaign,18,
+35,23,24,2024-08-18,5,5.18,25,,Pending,Crypto,Email Campaign,,
+36,106,28,2024-05-14,6,1293.75,10,29719.65,Pending,Crypto,Web,21,
+37,116,40,2023-08-01,,104.02,25,9320.09,Pending,Crypto,Partner API,12,
+38,9,54,2023-05-28,-9999,-9999,0,30728.15,Refunded,Crypto,Web,4,
+39,54,44,2023-06-03,11,1457.83,10,35501.91,Processing,PayPal,Mobile,6,Customer complained
+40,102,1,2023-05-25,19,953.17,0,13543.5,Cancelled,N/A,Mobile,5,
+41,82,51,2022-10-03,12,880.24,0,17505.63,Refunded,Crypto,Mobile,15,
+42,142,34,2023-01-15,10,1085.5,15,9559.07,Processing,Crypto,Partner API,10,
+43,83,34,2023-01-28,2,263.9,20,21037.6,Pending,,Mobile,,Promo applied
+44,126,54,2022-04-30,2,1488.24,10,29374.67,Cancelled,Credit Card,Email Campaign,18,
+45,50,16,2024-07-28,6,1118.49,20,6680.7,Processing,Crypto,Mobile,30,
+46,81,21,2023-03-15,14,864.02,10,18101.61,Processing,Credit Card,In-Store,29,
+47,77,14,2022-11-13,1,1886.98,25,5544.94,Processing,PayPal,In-Store,30,
+48,20,51,N/A,16,1380.74,-9999,2246.35,Completed,Bank Transfer,Partner API,28,Late delivery
+49,-9999,-9999,2024-03-15,18,657.03,0,11598.42,N/A,PayPal,Partner API,,
+50,22,28,2023-02-06,5,964.44,5,10657.62,Refunded,Credit Card,Partner API,11,
+51,7,11,2023-04-24,20,1606.58,15,-9999,N/A,Credit Card,Email Campaign,27,
+52,88,8,2023-06-14,,421.97,0,26733.74,Pending,Credit Card,Web,20,
+53,120,1,2024-03-02,9,1826.17,20,28390.46,,Crypto,Email Campaign,15,
+54,-9999,60,2023-09-12,11,,10,25035.44,Cancelled,Credit Card,In-Store,13,
+55,23,34,2023-10-02,20,1374.61,15,5279.57,Processing,PayPal,In-Store,30,
+56,38,37,2022-10-26,-9999,1068.26,15,16567.47,Pending,Crypto,In-Store,5,
+57,69,40,2024-08-18,8,-9999,15,15504.54,Refunded,PayPal,Web,30,
+58,106,43,2023-10-28,-9999,1854.57,5,31050.83,Processing,Crypto,Partner API,20,
+59,10,29,2024-11-23,2,495.21,0,17587.76,Completed,Bank Transfer,Partner API,23,
+60,37,42,2024-04-26,17,1558.57,0,23616.72,Processing,PayPal,Web,30,
+61,42,8,2022-11-24,15,175.19,,6843.69,Processing,PayPal,Mobile,14,
+62,115,12,2024-10-18,5,12.05,0,19743.74,Completed,Crypto,N/A,8,Bulk order
+63,143,-9999,2023-09-04,-9999,701.29,,16684.11,Completed,Bank Transfer,Email Campaign,15,
+64,93,6,2022-05-13,11,-9999,0,34377.72,Refunded,Crypto,Mobile,,
+65,136,31,2023-06-16,20,1972.63,15,24575.46,Processing,Crypto,Mobile,10,Late delivery
+66,-9999,41,,7,1997.98,5,-9999,Cancelled,Bank Transfer,In-Store,,
+67,102,40,2022-03-14,6,1668.48,25,18430.11,Refunded,Bank Transfer,Partner API,,
+68,145,21,2022-11-02,1,1372.56,0,15015.88,N/A,PayPal,Partner API,,Bulk order
+69,81,18,2023-09-12,16,746.31,15,31113.84,Cancelled,Crypto,Partner API,11,Bulk order
+70,84,56,2024-12-05,17,269.77,10,27485.22,Refunded,Credit Card,Web,24,
+71,148,41,2023-07-13,11,576.7,10,38332.34,Refunded,Credit Card,In-Store,23,Promo applied
+72,44,40,2022-04-21,18,264.5,20,23848.89,Completed,Crypto,In-Store,25,
+73,137,60,2023-09-28,15,190.37,25,37898.46,Refunded,Bank Transfer,Partner API,11,VIP customer
+74,117,5,2022-09-18,12,1692.3,20,31872.34,Cancelled,Credit Card,Email Campaign,8,
+75,141,31,2023-12-02,11,1389.65,5,26787.51,Refunded,Crypto,Email Campaign,27,
+76,79,5,2022-10-12,20,760.93,0,26438.65,Completed,Bank Transfer,Email Campaign,29,
+77,146,44,2024-11-11,14,1830.66,0,2505.8,,,Email Campaign,28,
+78,8,45,2024-08-30,11,815.04,20,14417.91,Pending,Bank Transfer,Mobile,,
+79,125,9,2024-07-19,14,1787.7,25,9037.38,Refunded,Credit Card,Mobile,30,
+80,-9999,3,2024-12-14,12,965.66,10,3138.6,Pending,Credit Card,Web,19,
+81,14,35,2023-08-27,16,1812.58,0,23909.48,Cancelled,N/A,Partner API,22,Late delivery
+82,74,9,2022-08-17,9,1233.52,0,14796.98,,PayPal,Email Campaign,3,Damaged
+83,127,27,N/A,8,1453.37,10,4648.61,Processing,Crypto,Partner API,18,
+84,100,10,2022-03-26,,1854.81,15,17277.12,Cancelled,Bank Transfer,In-Store,19,
+85,62,38,2022-01-18,17,1382.11,0,21015.32,,Bank Transfer,In-Store,,
+86,15,43,2022-09-24,7,1277.98,0,27829.19,Completed,Crypto,Web,9,VIP customer
+87,66,5,2022-05-23,2,-9999,5,7145.9,Cancelled,PayPal,Partner API,30,
+88,67,5,2024-03-10,9,42.44,15,22989.86,Completed,Crypto,Partner API,26,
+89,,45,N/A,16,1072.93,0,34135.15,Cancelled,Crypto,In-Store,2,Promo applied
+90,77,58,,12,1771.0,5,2529.08,Pending,Bank Transfer,Partner API,,
+91,87,3,2023-04-23,7,1336.3,0,,Processing,Credit Card,,29,
+92,25,11,2023-02-20,3,217.13,20,39034.37,Processing,PayPal,Mobile,11,
+93,71,27,2024-02-10,12,880.13,0,,Completed,Credit Card,Email Campaign,26,Duplicate??
+94,33,41,2024-10-20,15,1876.49,0,31305.5,Completed,Credit Card,Mobile,4,
+95,139,30,2022-11-24,7,391.47,,14574.08,Refunded,Bank Transfer,N/A,30,
+96,41,32,2023-10-30,3,1444.2,0,3931.58,Cancelled,PayPal,N/A,2,Damaged
+97,56,30,N/A,12,1441.04,0,4453.26,Cancelled,Crypto,In-Store,6,Damaged
+98,148,55,2024-08-05,14,980.98,20,9873.7,Processing,PayPal,Email Campaign,29,
+99,-9999,31,2023-05-08,-9999,1064.59,0,16270.66,Completed,Bank Transfer,,6,
+100,147,2,2022-01-03,15,1749.03,0,27633.12,Cancelled,Bank Transfer,In-Store,19,Customer complained
+101,86,4,2024-01-21,12,226.38,0,30945.28,N/A,Bank Transfer,Web,25,
+102,54,49,2023-12-09,12,1009.61,0,21280.86,N/A,Bank Transfer,In-Store,26,Customer complained
+103,49,30,2022-08-18,13,580.3,25,8178.2,Completed,Credit Card,Email Campaign,14,
+104,6,-9999,2023-10-31,8,1041.64,25,22694.39,Processing,Bank Transfer,In-Store,10,Late delivery
+105,38,30,2022-11-11,20,1425.07,,12671.87,Pending,Bank Transfer,Mobile,,
+106,89,29,2024-07-27,6,,,29542.41,Refunded,Bank Transfer,In-Store,25,Damaged
+107,145,60,2022-02-20,4,1800.85,5,-9999,Processing,PayPal,Mobile,7,
+108,138,44,2022-04-25,3,791.88,15,28641.39,Processing,Crypto,In-Store,15,Customer complained
+109,56,29,2024-04-28,14,580.82,0,12136.21,Refunded,N/A,Email Campaign,,
+110,70,36,N/A,19,278.17,10,12163.54,Refunded,Crypto,Web,21,Duplicate??
+111,32,58,2024-10-06,6,1377.25,0,14476.76,Completed,Crypto,Partner API,12,
+112,,17,2023-07-13,2,924.78,,11673.65,Cancelled,Credit Card,Mobile,6,
+113,81,44,,9,-9999,10,19401.11,Processing,PayPal,Mobile,26,Customer complained
+114,107,5,2024-06-24,5,961.64,15,12194.32,Cancelled,Credit Card,Mobile,7,
+115,21,49,2024-11-17,,971.09,25,-9999,Pending,Credit Card,Web,29,
+116,-9999,10,2023-05-11,9,698.93,-9999,,Processing,PayPal,In-Store,1,Customer complained
+117,55,55,2023-12-28,12,374.33,20,9109.89,Completed,Bank Transfer,Web,12,
+118,143,6,2024-04-14,4,916.61,20,2793.67,Refunded,Crypto,In-Store,16,
+119,102,43,N/A,4,804.25,5,23802.48,Completed,Credit Card,Partner API,23,Bulk order
+120,103,43,2023-05-29,13,1025.27,5,5392.99,Refunded,Credit Card,Partner API,13,
+121,84,40,2024-10-16,3,1042.3,10,32381.17,Refunded,Credit Card,Web,4,
+122,81,29,2022-10-03,2,1320.52,20,4384.19,Pending,Crypto,Mobile,16,
+123,97,23,2022-02-25,10,,15,17131.65,Cancelled,Crypto,Mobile,19,
+124,17,8,2024-05-12,1,79.57,25,39430.73,Refunded,Crypto,Web,,
+125,87,52,2022-06-04,11,602.54,5,1910.78,Pending,Crypto,Email Campaign,,Customer complained
+126,87,37,2023-09-07,16,-9999,15,16098.02,Cancelled,Crypto,Email Campaign,,
+127,48,14,2022-05-03,15,1277.66,15,9622.55,Refunded,Bank Transfer,Partner API,3,
+128,106,19,2023-05-18,9,476.08,10,22397.4,Pending,Credit Card,In-Store,26,
+129,141,-9999,2022-05-11,16,115.38,20,26870.17,Cancelled,Crypto,Mobile,17,Bulk order
+130,128,16,2023-03-23,11,1170.73,0,10989.15,Pending,Credit Card,In-Store,,
+131,122,18,2022-03-13,5,1432.76,0,31554.22,Completed,Crypto,In-Store,18,Duplicate??
+132,,26,2022-11-25,9,1872.96,15,30671.97,Cancelled,Credit Card,Web,16,
+133,86,57,2023-11-01,4,1398.47,0,25658.5,Cancelled,Crypto,,10,
+134,22,16,2022-10-01,5,1373.08,15,7954.56,Cancelled,PayPal,Partner API,8,
+135,6,42,2024-05-28,8,1948.38,-9999,14723.13,N/A,,Email Campaign,15,Duplicate??
+136,31,14,2023-08-03,9,990.87,5,16346.88,Pending,Bank Transfer,Mobile,12,
+137,118,31,2023-06-09,11,798.12,,37243.27,Refunded,Bank Transfer,Email Campaign,1,
+138,98,26,2024-10-06,5,1121.32,25,12699.52,Cancelled,PayPal,N/A,,Bulk order
+139,93,19,2022-12-04,9,1524.32,25,6059.08,Cancelled,N/A,N/A,16,
+140,120,58,2022-10-31,2,1977.69,0,11371.82,Refunded,Bank Transfer,Email Campaign,1,
+141,147,59,2022-08-06,16,,,18414.72,Completed,Crypto,In-Store,,Duplicate??
+142,84,47,2022-04-24,19,1727.24,-9999,10214.0,Cancelled,N/A,Mobile,10,
+143,40,32,2024-11-15,10,1209.01,25,19062.82,Completed,Crypto,Partner API,14,
+144,-9999,22,2024-12-10,8,1428.7,25,36289.24,Processing,PayPal,In-Store,10,
+145,142,3,2023-12-29,17,193.5,0,660.59,Processing,Crypto,Mobile,,
+146,77,47,2022-06-10,15,533.82,10,4262.16,Pending,Credit Card,Web,23,
+147,125,53,,12,1926.47,0,27844.34,Cancelled,Credit Card,Mobile,21,Promo applied
+148,23,30,,,336.38,25,8061.52,Refunded,N/A,Web,14,Duplicate??
+149,149,36,2024-09-26,2,974.77,0,16885.96,Processing,Credit Card,Partner API,,
+150,89,-9999,2023-11-26,10,941.13,25,11742.83,Processing,Crypto,In-Store,28,
+151,54,48,2024-10-08,16,402.97,5,39970.46,Completed,Bank Transfer,Mobile,17,
+152,17,8,2023-07-02,4,975.3,0,37066.02,Cancelled,Crypto,Web,20,Customer complained
+153,-9999,7,2024-11-02,4,1822.42,0,14555.84,Cancelled,Credit Card,Partner API,1,
+154,122,33,2024-12-20,9,1510.92,5,17158.63,Pending,Crypto,Email Campaign,1,
+155,3,34,2022-03-17,3,806.29,0,2321.82,N/A,Bank Transfer,Email Campaign,11,Late delivery
+156,72,40,2023-12-09,13,414.24,20,-9999,Processing,Bank Transfer,Mobile,7,
+157,142,22,2023-09-15,,1781.19,0,33664.92,Cancelled,Bank Transfer,Web,1,
+158,61,38,2024-02-13,18,471.51,-9999,20662.91,Processing,Bank Transfer,Mobile,3,
+159,109,31,2023-06-25,3,1054.88,20,27563.82,Processing,Crypto,Mobile,15,
+160,132,8,2022-09-01,15,1494.26,20,14789.74,Cancelled,PayPal,In-Store,16,
+161,37,38,N/A,10,435.09,0,22926.63,,Bank Transfer,Partner API,5,Duplicate??
+162,116,10,2024-03-20,11,1251.42,0,35602.83,Refunded,Credit Card,Web,23,
+163,32,6,2024-09-01,20,1516.44,0,37447.91,Processing,Credit Card,Mobile,29,
+164,22,39,2022-02-19,-9999,,15,3650.09,Refunded,PayPal,Mobile,,
+165,105,4,2024-04-25,11,1428.03,10,33111.38,Completed,PayPal,Email Campaign,25,
+166,30,21,2022-07-27,-9999,62.67,0,-9999,Completed,PayPal,Mobile,26,
+167,109,36,2024-09-14,1,1922.42,10,15212.34,,PayPal,Email Campaign,18,
+168,77,45,2023-10-14,5,1997.65,15,39185.82,Pending,Bank Transfer,In-Store,20,
+169,35,1,2022-06-16,1,1347.05,0,35703.96,Refunded,Crypto,In-Store,20,
+170,46,52,2022-02-10,1,744.11,15,32653.07,Completed,PayPal,Partner API,,
+171,,53,N/A,4,1140.36,0,5105.96,Processing,PayPal,In-Store,23,
+172,65,57,2024-04-13,14,,25,,Cancelled,,Partner API,13,
+173,21,-9999,2023-11-06,8,-9999,,,Pending,Bank Transfer,Mobile,11,VIP customer
+174,134,5,2022-05-05,20,195.86,20,-9999,Completed,N/A,N/A,14,
+175,15,19,2022-01-22,13,1505.17,25,35198.73,Processing,Bank Transfer,Web,7,
+176,4,5,2024-06-29,7,256.33,0,2429.04,Cancelled,Crypto,In-Store,25,
+177,121,22,2022-04-22,1,1317.07,5,25625.79,Pending,Credit Card,Partner API,20,
+178,149,22,2022-01-08,14,214.17,5,8533.41,Completed,Bank Transfer,Partner API,1,
+179,19,36,2022-03-02,10,1264.51,10,35416.44,N/A,Bank Transfer,Mobile,,Customer complained
+180,6,9,2022-12-17,4,424.42,20,2624.45,Cancelled,PayPal,Mobile,11,
+181,63,49,2023-07-28,7,591.89,25,3265.49,N/A,Credit Card,Partner API,17,
+182,133,21,2022-03-16,17,1432.72,5,9383.04,Cancelled,Crypto,Email Campaign,9,
+183,35,19,2024-08-15,12,87.08,15,12687.65,Cancelled,PayPal,In-Store,3,
+184,129,42,2023-11-15,9,-9999,15,29811.0,Completed,Bank Transfer,Email Campaign,25,
+185,140,1,2022-01-25,10,1567.34,0,9110.86,Refunded,PayPal,Email Campaign,15,
+186,119,6,2022-03-03,7,1884.15,0,29514.82,Refunded,Bank Transfer,Partner API,25,Bulk order
+187,84,37,2024-03-11,5,1905.51,5,2557.73,Processing,Crypto,Email Campaign,10,
+188,27,-9999,2023-04-23,20,-9999,0,,Refunded,Bank Transfer,Partner API,5,
+189,123,25,2023-09-28,7,415.33,25,307.66,Refunded,Credit Card,Email Campaign,30,
+190,126,-9999,2022-12-25,3,1762.58,0,29332.43,Cancelled,PayPal,Web,8,Damaged
+191,71,35,2022-09-06,3,1446.21,0,20180.75,Refunded,Crypto,In-Store,,
+192,119,48,2024-08-08,7,26.42,-9999,26284.33,Pending,Crypto,In-Store,1,
+193,46,35,2022-12-31,6,1528.36,0,21296.63,Pending,Credit Card,Email Campaign,29,
+194,79,,2022-02-02,13,1858.0,0,7694.15,Pending,PayPal,Web,6,
+195,12,7,2024-05-26,11,383.15,-9999,,Processing,,Mobile,,VIP customer
+196,12,14,2022-07-14,20,1981.0,20,38894.95,Processing,Bank Transfer,In-Store,3,
+197,150,33,2022-09-12,8,,20,-9999,Completed,Bank Transfer,Mobile,2,
+198,114,22,2023-08-14,11,1522.19,5,13257.5,Refunded,Credit Card,Mobile,8,
+199,98,12,2022-10-17,-9999,985.83,-9999,23709.3,Completed,PayPal,Web,6,
+200,63,39,2024-01-07,10,1935.61,0,16913.66,Refunded,Crypto,,28,
+201,77,10,2024-09-11,6,929.98,0,7836.67,Refunded,,Email Campaign,13,Wrong item sent
+202,96,20,2022-11-29,19,1770.57,20,30853.1,Completed,Bank Transfer,Partner API,2,
+203,109,16,2024-07-21,12,1354.47,0,24089.95,Pending,,Web,13,
+204,21,13,2024-02-23,6,509.48,20,36973.58,Processing,Credit Card,In-Store,7,Wrong item sent
+205,,11,2024-06-01,1,1548.62,15,5381.94,Refunded,Credit Card,Mobile,,
+206,50,58,2022-06-25,15,1250.72,,1196.37,Pending,Crypto,,1,
+207,11,34,2023-11-22,13,1973.86,15,35607.19,Refunded,PayPal,Partner API,,
+208,85,1,2024-12-22,13,1776.5,5,24737.88,Processing,Crypto,,27,
+209,93,52,2024-09-02,15,971.65,0,11761.58,Completed,PayPal,Email Campaign,2,
+210,23,44,2023-03-10,15,895.34,-9999,,Processing,Bank Transfer,In-Store,16,Customer complained
+211,35,41,2022-05-13,3,668.94,20,29721.28,Processing,Crypto,Mobile,4,
+212,49,8,2023-01-24,5,1908.37,20,14607.3,Completed,PayPal,Email Campaign,,
+213,118,53,2022-03-12,8,914.29,10,27547.11,Pending,Crypto,Mobile,13,
+214,86,46,2024-03-13,8,109.87,0,21922.24,Pending,Crypto,Partner API,10,
+215,50,36,2023-09-15,5,1583.6,0,17680.93,Completed,PayPal,Mobile,,
+216,148,51,2022-07-16,5,1965.49,25,2108.36,Pending,Bank Transfer,Mobile,2,
+217,102,45,2024-02-22,6,753.87,25,-9999,Completed,Crypto,Email Campaign,19,
+218,25,12,2022-02-10,14,254.85,,33487.39,Processing,Credit Card,Mobile,6,Damaged
+219,2,52,2022-03-13,2,416.43,0,14548.75,Processing,Crypto,Web,,Bulk order
+220,137,37,2022-07-22,11,1972.11,0,7531.07,Processing,PayPal,Email Campaign,9,
+221,109,17,2022-10-21,6,171.09,0,10783.29,Refunded,PayPal,Email Campaign,20,
+222,40,51,N/A,1,498.76,0,13347.36,Processing,PayPal,Web,13,Customer complained
+223,45,57,2022-07-22,16,701.06,0,30077.4,Cancelled,Crypto,Mobile,23,
+224,33,37,2024-05-06,2,1280.19,0,14166.52,Pending,Bank Transfer,Partner API,30,Bulk order
+225,23,27,2022-04-28,3,158.0,10,19719.09,Completed,Crypto,Mobile,22,Customer complained
+226,,13,2024-12-17,1,1406.67,0,38586.25,Pending,PayPal,In-Store,2,
+227,98,8,2023-08-25,8,1702.3,0,22757.99,Cancelled,Bank Transfer,Email Campaign,,
+228,-9999,1,2022-01-19,11,218.79,25,21168.57,Pending,Crypto,,9,
+229,102,24,2023-12-26,6,542.62,0,34821.86,Refunded,PayPal,Mobile,29,
+230,51,43,2024-03-29,4,1102.5,20,38307.57,Pending,PayPal,,2,
+231,88,39,2022-11-09,14,-9999,0,30671.44,Refunded,PayPal,Partner API,26,
+232,129,13,2023-01-29,19,301.71,,7993.74,N/A,Crypto,In-Store,8,
+233,123,28,2022-04-08,10,730.33,,29792.74,Refunded,Crypto,Email Campaign,16,
+234,78,,2024-12-19,18,264.96,5,8409.23,Cancelled,Credit Card,Email Campaign,30,Promo applied
+235,50,60,N/A,18,606.45,5,28467.01,Pending,Bank Transfer,Partner API,,
+236,124,60,2022-05-05,1,551.93,5,15905.78,N/A,Credit Card,Email Campaign,13,
+237,53,11,2024-12-11,19,1758.91,5,10747.9,Refunded,,Mobile,29,
+238,35,-9999,2024-01-26,8,423.89,10,16339.63,Cancelled,Bank Transfer,Web,9,
+239,5,56,2023-02-27,19,1492.81,5,8164.71,Cancelled,Crypto,Mobile,5,Customer complained
+240,127,12,2022-11-30,6,983.58,20,7522.04,,Crypto,Partner API,24,Late delivery
+241,26,2,2023-07-03,1,,0,385.75,Pending,Bank Transfer,Web,19,Damaged
+242,79,10,2023-08-31,18,1256.83,20,,Completed,Crypto,In-Store,29,
+243,29,8,2022-11-06,10,1233.32,15,27180.54,Completed,Bank Transfer,In-Store,,VIP customer
+244,68,46,2024-03-10,1,1956.21,25,4535.43,Pending,Bank Transfer,In-Store,13,
+245,127,45,2024-10-15,20,670.26,25,32857.95,Pending,Crypto,Mobile,1,
+246,5,31,2022-10-23,-9999,701.95,20,-9999,Pending,PayPal,Mobile,,VIP customer
+247,14,43,2023-05-17,16,,20,7305.16,Cancelled,Bank Transfer,In-Store,1,
+248,40,-9999,2023-06-13,6,26.68,10,16952.57,Refunded,Credit Card,Mobile,2,
+249,48,36,N/A,3,939.53,15,7797.28,Refunded,Credit Card,,18,
+250,55,49,2022-04-02,7,,,12590.07,Cancelled,Credit Card,In-Store,11,VIP customer
+251,34,7,2024-09-03,17,1615.95,0,6070.0,Processing,Credit Card,Mobile,21,
+252,42,33,2024-01-08,20,1860.8,,28513.37,Pending,PayPal,Email Campaign,19,
+253,128,1,2024-07-20,10,1938.05,10,11211.89,Completed,N/A,Partner API,9,Duplicate??
+254,36,37,2024-11-15,12,804.87,15,27291.21,Pending,Bank Transfer,Web,24,Late delivery
+255,40,19,2023-12-16,19,150.59,-9999,7219.13,Refunded,Crypto,Mobile,,
+256,125,48,2023-10-18,9,1092.44,,32343.26,Pending,Crypto,Mobile,22,
+257,65,6,2023-06-16,9,600.18,-9999,36066.65,Refunded,Bank Transfer,In-Store,18,
+258,42,28,2022-10-24,19,24.81,,35861.08,Processing,Crypto,Web,9,
+259,1,54,2022-12-07,15,,5,38095.55,Pending,Credit Card,,17,Customer complained
+260,128,30,2022-12-27,12,1087.22,15,23799.72,Cancelled,Crypto,Partner API,30,Customer complained
+261,23,7,2022-07-24,1,825.5,0,34069.69,Processing,Crypto,Web,4,
+262,119,53,2023-06-26,,752.41,20,176.26,Cancelled,,Mobile,17,VIP customer
+263,86,37,2024-05-28,8,785.77,20,6956.95,Refunded,PayPal,Web,,
+264,148,54,,9,322.31,,28305.96,Completed,Credit Card,Web,,
+265,92,42,2022-04-16,10,1681.71,0,25539.08,Refunded,Credit Card,Email Campaign,,
+266,47,32,2022-06-06,7,,20,12550.26,Completed,PayPal,Web,21,
+267,9,22,2022-09-07,16,,0,20724.62,Processing,PayPal,Web,,
+268,22,9,2024-10-12,16,188.48,20,10011.23,Cancelled,Bank Transfer,Web,10,
+269,53,32,2024-02-24,15,1495.42,15,-9999,Processing,PayPal,Email Campaign,20,VIP customer
+270,-9999,12,2023-10-06,14,-9999,15,28674.94,Cancelled,Bank Transfer,N/A,7,
+271,27,46,2023-10-18,3,1294.31,0,19951.05,Refunded,Crypto,Partner API,13,
+272,6,42,2024-12-28,19,1823.73,0,660.73,N/A,Crypto,In-Store,3,
+273,81,4,,15,1283.99,0,5557.99,Cancelled,Crypto,Web,12,Late delivery
+274,14,-9999,2024-02-17,2,154.71,0,23342.29,Processing,Bank Transfer,Email Campaign,14,
+275,32,16,2023-08-30,16,647.21,15,34916.16,Pending,PayPal,Web,,
+276,56,25,2023-10-01,4,1628.92,0,4235.36,Processing,Bank Transfer,Partner API,25,
+277,18,11,2024-08-01,19,298.84,0,21240.11,Completed,Credit Card,Web,13,
+278,131,29,2024-04-04,-9999,768.13,10,19749.71,Pending,Credit Card,Web,,
+279,69,35,2023-07-04,8,1400.53,0,13911.85,Refunded,Bank Transfer,Web,20,
+280,79,45,2022-01-27,11,337.46,20,7108.83,Refunded,Credit Card,Web,19,
+281,64,3,2022-10-28,19,584.86,0,29450.1,Processing,Bank Transfer,In-Store,15,
+282,91,22,2024-04-20,20,543.53,0,1245.88,Completed,Crypto,Web,21,
+283,71,44,2024-03-11,15,1752.81,10,1653.59,Cancelled,Bank Transfer,Web,26,Bulk order
+284,29,32,2022-11-30,5,304.7,,11796.12,Processing,PayPal,Email Campaign,1,
+285,-9999,9,2022-06-26,10,1006.48,0,7877.13,Processing,Credit Card,Web,26,
+286,99,58,2023-10-23,9,1196.09,0,7988.27,Refunded,PayPal,Web,15,
+287,97,54,2024-05-25,5,1389.8,20,,Cancelled,N/A,Mobile,8,
+288,96,35,2024-11-26,-9999,1690.99,-9999,10814.29,Completed,Credit Card,Web,23,
+289,16,38,2022-11-13,2,1034.95,10,37461.88,Refunded,PayPal,Web,17,
+290,53,2,2023-04-27,15,1852.46,10,27256.0,Refunded,Credit Card,Web,22,
+291,131,35,2023-07-18,16,1336.73,0,32541.61,Refunded,Bank Transfer,Email Campaign,2,
+292,-9999,59,2024-10-27,5,1447.52,20,6988.13,Pending,Bank Transfer,Mobile,10,Customer complained
+293,124,31,2023-10-26,6,1855.19,15,-9999,Processing,Credit Card,Mobile,16,Duplicate??
+294,83,50,2024-05-10,8,1762.11,0,4587.81,Refunded,Credit Card,In-Store,30,
+295,28,25,2022-11-28,19,395.46,-9999,979.48,Cancelled,Credit Card,Mobile,14,
+296,19,44,2024-01-01,17,1665.64,0,17560.73,Refunded,Credit Card,Mobile,4,
+297,14,-9999,2022-11-20,10,506.51,0,9663.52,Completed,Bank Transfer,Web,19,
+298,68,3,2023-11-07,9,,0,2925.75,Pending,Credit Card,Web,20,Duplicate??
+299,34,3,,16,1302.42,,31275.08,Cancelled,Crypto,Web,,Damaged
+300,111,36,2024-06-13,15,1233.23,5,23548.81,Cancelled,Credit Card,Web,2,

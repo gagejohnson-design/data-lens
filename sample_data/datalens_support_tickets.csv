@@ -1,0 +1,101 @@
+ticket_id,customer_id,order_id,type,priority,created_date,resolved_date,agent_id,resolution,satisfaction_score,response_time_hrs
+1,12,126,Returns,Critical,2022-09-17,2023-07-03,,Open,3,86.2
+2,142,270,Returns,N/A,2024-06-27,2024-09-28,12,Closed - No Action,,13.6
+3,54,73,Billing,Critical,2023-04-18,2024-11-04,,Resolved,3,-9999
+4,,,N/A,Medium,2023-07-26,2024-08-22,,,1,87.4
+5,56,,Account,Critical,2023-11-20,2024-04-02,,Resolved,3,82.5
+6,133,240,Technical,Low,2024-08-07,2024-12-30,-9999,Open,,
+7,4,165,Returns,Critical,2023-07-16,2024-03-28,,Escalated,2,39.5
+8,142,,Technical,High,2022-06-12,,4,Open,2,
+9,-9999,32,Returns,Low,2024-11-03,2024-12-10,6,Resolved,,7.9
+10,53,,General,Critical,2024-11-12,,6,Escalated,3,45.5
+11,12,,,Medium,2022-03-05,,13,Escalated,5,3.6
+12,20,290,Account,Critical,2024-02-20,2024-03-31,15,Resolved,5,42.6
+13,63,119,General,Low,2023-08-24,2024-02-08,15,Resolved,3,62.9
+14,146,276,Technical,Critical,2024-07-08,2024-09-04,10,Escalated,,39.5
+15,51,8,Technical,High,2022-10-31,2024-08-08,8,Open,1,66.4
+16,100,,General,Medium,2022-09-29,2024-03-24,15,Escalated,1,7.5
+17,116,245,Technical,Low,,2024-12-16,10,Closed - No Action,5,69.5
+18,127,269,Account,Critical,2022-07-18,,13,,2,41.6
+19,73,,General,Medium,2023-10-06,,10,Open,,20.3
+20,11,100,Billing,Low,2022-12-12,,10,Closed - No Action,3,88.2
+21,127,143,Billing,Low,2022-09-03,2023-11-19,2,Escalated,5,-9999
+22,111,267,Returns,Low,2023-10-07,2023-10-26,4,Closed - No Action,,19.2
+23,128,,Billing,,2024-09-19,2024-12-21,9,,5,36.8
+24,47,150,General,Critical,2023-12-16,2024-11-16,-9999,Resolved,3,40.6
+25,46,,Billing,Critical,2023-05-22,2023-09-17,8,Closed - No Action,1,28.3
+26,83,,General,Critical,2024-04-17,,5,Open,3,43.2
+27,29,169,Technical,Low,N/A,2024-09-08,-9999,Escalated,5,
+28,41,,Technical,Medium,2023-03-08,2023-09-27,4,Open,,2.4
+29,-9999,,Billing,,2022-07-29,2024-10-16,14,Closed - No Action,3,-9999
+30,,278,Account,Low,2024-10-30,2024-12-17,4,Escalated,1,29.4
+31,148,,Billing,Critical,2022-07-24,,15,Open,4,91.4
+32,7,,Returns,Low,2022-08-10,2024-03-23,13,N/A,,83.1
+33,104,291,N/A,Critical,2023-05-27,,6,Resolved,4,83.7
+34,140,121,Returns,Critical,2023-03-05,2024-07-17,-9999,Resolved,,
+35,51,20,General,Critical,2024-11-30,2024-12-10,7,Escalated,3,50.4
+36,37,191,Account,Critical,2024-02-01,2024-04-25,15,Open,4,1.4
+37,80,,Billing,High,2022-11-04,2022-11-09,10,Escalated,3,60.6
+38,110,,Account,High,2023-07-17,,,Open,,17.5
+39,99,142,Account,Critical,,2024-05-10,4,Resolved,2,16.2
+40,14,218,General,Low,2023-10-25,,13,Closed - No Action,3,51.2
+41,72,287,General,High,2023-03-15,2024-12-22,7,,4,74.1
+42,144,98,General,Low,2024-05-18,,,Escalated,3,
+43,71,,Returns,Low,2023-07-14,,14,Closed - No Action,4,17.1
+44,8,91,Technical,N/A,2022-08-01,,1,Escalated,,
+45,94,207,General,N/A,2023-10-11,2024-01-05,9,N/A,3,58.6
+46,1,61,Returns,Low,2024-04-18,,2,Open,,57.0
+47,96,127,Returns,Medium,2022-12-13,2023-07-23,,Escalated,,30.6
+48,52,,General,Critical,2023-01-21,,13,Closed - No Action,2,4.0
+49,146,178,Returns,High,2024-02-29,,5,,,63.4
+50,96,18,Returns,High,,2023-09-09,7,Escalated,,87.7
+51,113,295,General,Critical,2024-08-14,2024-08-19,6,Closed - No Action,,93.2
+52,110,206,,Medium,2024-11-04,,12,Open,2,12.9
+53,37,85,,Medium,2022-04-21,2023-03-03,-9999,Open,2,15.2
+54,41,202,Technical,Critical,2024-02-06,,13,Closed - No Action,2,38.7
+55,101,,,Medium,2023-08-03,2024-10-10,6,Resolved,1,62.2
+56,78,,Technical,High,2023-01-20,,,Closed - No Action,5,80.2
+57,26,7,Technical,Critical,,2024-07-08,11,Closed - No Action,,41.1
+58,116,172,Account,Low,2022-08-26,2024-11-24,9,Resolved,,89.7
+59,117,21,Billing,Critical,2023-02-09,2024-10-30,11,Closed - No Action,,78.7
+60,,,Billing,High,2023-01-02,,7,Resolved,,14.3
+61,63,269,Account,Low,N/A,2024-10-28,10,Resolved,1,32.8
+62,48,,Billing,Critical,2023-09-11,2023-09-22,10,Escalated,2,
+63,112,96,Returns,Low,2024-08-26,,11,Resolved,,40.1
+64,25,,Returns,High,2023-07-01,2024-05-21,8,Escalated,5,1.7
+65,119,273,Technical,High,2023-12-11,2024-02-26,10,Closed - No Action,,20.3
+66,116,,Account,High,2024-01-27,2024-07-06,,Escalated,2,36.3
+67,25,,Billing,Medium,2024-02-15,2024-04-18,12,Closed - No Action,,86.5
+68,82,116,General,Critical,2024-01-14,2024-12-19,3,Open,,79.8
+69,99,215,General,Low,2022-12-19,2023-03-29,10,Resolved,1,31.5
+70,6,200,Account,Medium,2024-08-24,2024-11-26,6,Open,2,31.3
+71,119,228,Technical,Critical,2022-03-05,,10,Open,1,
+72,-9999,134,Account,Low,2024-04-12,2024-12-08,1,Closed - No Action,1,35.2
+73,110,,Returns,Low,2024-11-13,2024-12-11,11,Open,,9.8
+74,126,176,Returns,High,2022-06-01,2024-05-27,10,Resolved,,28.0
+75,79,,Returns,Critical,2024-01-30,2024-06-27,13,Open,3,
+76,,,Account,Critical,2023-03-10,2023-08-08,6,Escalated,4,62.4
+77,,176,Technical,Medium,2024-09-14,,12,Open,1,80.7
+78,94,,Billing,Low,2024-12-09,2024-12-15,14,Resolved,,54.6
+79,63,91,Billing,High,2023-06-09,2023-12-13,4,Resolved,,29.4
+80,123,27,Returns,Low,2023-05-15,2024-12-30,2,Resolved,,47.0
+81,114,,Account,Low,2024-05-30,2024-06-27,5,Open,3,91.4
+82,71,226,Billing,Medium,2024-12-25,,9,Open,3,9.5
+83,47,,Technical,High,2023-12-03,2024-09-03,2,Open,,15.4
+84,41,243,Account,High,2022-12-18,2024-09-02,15,Escalated,,69.9
+85,145,207,Billing,High,2023-10-08,2024-05-12,8,Resolved,,63.7
+86,110,,Account,Medium,2024-02-04,,-9999,Open,5,45.4
+87,125,193,Billing,High,2022-04-05,2023-05-09,15,Closed - No Action,3,93.8
+88,77,225,Technical,High,2022-11-07,2024-07-02,,Resolved,3,91.9
+89,48,,Returns,High,2024-07-02,2024-08-25,1,Closed - No Action,1,
+90,112,168,Account,High,2024-11-15,2024-12-21,-9999,Resolved,1,55.3
+91,111,78,Returns,High,2023-01-26,2024-12-26,12,Closed - No Action,3,1.1
+92,83,,Technical,High,2022-02-08,,4,Escalated,5,15.1
+93,7,21,Technical,Low,2023-02-27,2023-06-10,4,Open,3,22.7
+94,113,14,General,Medium,2023-12-29,,7,Closed - No Action,,93.1
+95,54,184,Returns,Medium,2024-11-23,,6,Resolved,,36.8
+96,17,154,Technical,Low,2022-07-24,2023-06-06,15,Escalated,1,13.9
+97,40,20,Billing,Medium,2022-01-19,,6,Open,,50.0
+98,,,General,High,N/A,2023-04-29,1,,4,4.9
+99,,48,General,Low,2024-12-11,,7,Closed - No Action,1,30.2
+100,139,50,General,Medium,2023-06-11,,13,Open,4,27.5
