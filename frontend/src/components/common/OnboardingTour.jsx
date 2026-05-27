@@ -20,7 +20,7 @@ const STEPS = [
   },
   {
     title: 'Relationship Map & AI',
-    body: 'The Relationship Map shows FK connections as a live graph. Use "Suggest Relationships" to auto-detect joins. The AI tab lets you ask plain-English questions and get SQL back instantly — just add your Gemini API key in Settings.',
+    body: 'The Relationship Map shows FK connections as a live graph. Use "Suggest Relationships" to auto-detect joins. The AI tab lets you ask plain-English questions and get SQL back instantly — powered by Claude.',
     icon: '🤖',
   },
   {

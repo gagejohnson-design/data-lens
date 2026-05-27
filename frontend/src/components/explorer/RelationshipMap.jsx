@@ -7,6 +7,48 @@ import { updateSnapshotData } from '../../api/snapshots';
 import { inferRelationships } from '../../utils/inferRelationships';
 import NodeSidePanel from './NodeSidePanel';
 
+function downloadText(content, filename, mimeType = 'text/plain') {
+  const blob = new Blob([content], { type: mimeType });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function buildMermaid(tables, relationships) {
+  const typeMap = { text: 'string', string: 'string', number: 'int', boolean: 'boolean', integer: 'int', float: 'float', date: 'date', timestamp: 'datetime', timestamptz: 'datetime' };
+  const lines = ['erDiagram'];
+  for (const t of tables) {
+    const display = t.name.includes('__') ? t.name.split('__').slice(1).join('__') : t.name;
+    lines.push(`  ${display} {`);
+    for (const c of (t.columns || [])) {
+      const mType = typeMap[(c.type || '').toLowerCase()] || 'string';
+      lines.push(`    ${mType} ${c.name.replace(/\W/g, '_')}${c.nullable ? '' : ' PK'}`);
+    }
+    lines.push('  }');
+  }
+  for (const r of relationships) {
+    const from = r.from_table.includes('__') ? r.from_table.split('__').slice(1).join('__') : r.from_table;
+    const to = r.to_table.includes('__') ? r.to_table.split('__').slice(1).join('__') : r.to_table;
+    lines.push(`  ${from} ||--o{ ${to} : "${r.from_column}"`);
+  }
+  return lines.join('\n');
+}
+
+function buildDDL(tables) {
+  const typeMap = { text: 'TEXT', string: 'TEXT', number: 'NUMERIC', boolean: 'BOOLEAN', integer: 'INTEGER', float: 'FLOAT', date: 'DATE', timestamp: 'TIMESTAMP', timestamptz: 'TIMESTAMPTZ' };
+  return tables.map(t => {
+    const display = t.name.includes('__') ? t.name.split('__').slice(1).join('__') : t.name;
+    const cols = (t.columns || []).map(c => {
+      const sqlType = typeMap[(c.type || '').toLowerCase()] || 'TEXT';
+      return `  ${c.name} ${sqlType}${c.nullable ? '' : ' NOT NULL'}`;
+    }).join(',\n');
+    return `CREATE TABLE ${display} (\n${cols}\n);`;
+  }).join('\n\n');
+}
+
 const NODE_W = 160;
 const NODE_H = 40;
 const MAX_GRAPH_NODES = 60;
@@ -185,6 +227,20 @@ export default function RelationshipMap() {
       <div className="map-toolbar">
         <button className="btn btn-secondary btn-sm" onClick={handleSuggest}>
           Suggest Relationships
+        </button>
+        <button
+          className="btn btn-ghost btn-sm"
+          onClick={() => downloadText(buildMermaid(tables, existingRels), `${mergedSnapshot.name.replace(/[^a-z0-9]/gi, '_')}_erd.mmd`)}
+          title="Download Mermaid ER diagram"
+        >
+          Export ERD
+        </button>
+        <button
+          className="btn btn-ghost btn-sm"
+          onClick={() => downloadText(buildDDL(tables), `${mergedSnapshot.name.replace(/[^a-z0-9]/gi, '_')}_schema.sql`)}
+          title="Download full DDL (CREATE TABLE statements)"
+        >
+          Export DDL
         </button>
         {existingRels.length > 0 && (
           <span className="map-toolbar-hint">

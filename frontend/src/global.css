@@ -3,6 +3,7 @@
   --color-bg: #0f1117;
   --color-surface: #1a1d27;
   --color-surface-2: #22263a;
+  --color-surface-raised: #252938;
   --color-border: #2e3250;
   --color-primary: #22c55e;
   --color-primary-hover: #16a34a;
@@ -30,6 +31,7 @@
   --color-bg: #f1f5f9;
   --color-surface: #ffffff;
   --color-surface-2: #f8fafc;
+  --color-surface-raised: #f1f5f9;
   --color-border: #e2e8f0;
   --color-text: #0f172a;
   --color-text-muted: #475569;

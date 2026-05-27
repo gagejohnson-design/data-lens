@@ -4,31 +4,48 @@ import NavBar from '../components/common/NavBar';
 import InfoModal from '../components/common/InfoModal';
 import FileUploadForm from '../components/connection/FileUploadForm';
 import SnapshotManager from '../components/connection/SnapshotManager';
-import { uploadFiles } from '../api/connections';
+import { uploadFiles, connectDb } from '../api/connections';
 import { saveSnapshot } from '../api/snapshots';
 import { useSnapshot } from '../context/SnapshotContext';
+
+const SOURCE_PLACEHOLDERS = {
+  postgres: 'postgresql://user:password@host:5432/dbname',
+  mysql: 'mysql://user:password@host:3306/dbname',
+};
 
 export default function ConnectionHubPage() {
   const { loadSnapshot } = useSnapshot();
   const navigate = useNavigate();
   const [limitError, setLimitError] = useState(null);
-  const [pendingData, setPendingData] = useState(null); // { data, defaultName }
+  const [pendingData, setPendingData] = useState(null); // { data, defaultName, connection? }
   const [snapshotName, setSnapshotName] = useState('');
   const [description, setDescription] = useState('');
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
+
+  // DB connect form state
+  const [dbPanel, setDbPanel] = useState(false);
+  const [dbType, setDbType] = useState('postgres');
+  const [connStr, setConnStr] = useState('');
+  const [connecting, setConnecting] = useState(false);
+  const [connError, setConnError] = useState(null);
 
   const handleSave = async () => {
     if (!pendingData || !snapshotName.trim()) return;
     setSaving(true);
     setSaveError(null);
     try {
-      const { data: snapshot } = await saveSnapshot({
+      const payload = {
         name: snapshotName.trim(),
         description: description.trim() || undefined,
         source_type: pendingData.data.source_type,
         snapshot_data: pendingData.data,
-      });
+      };
+      if (pendingData.connection) {
+        payload.connection_string_enc = pendingData.connection.enc;
+        payload.connection_iv = pendingData.connection.iv;
+      }
+      const { data: snapshot } = await saveSnapshot(payload);
       loadSnapshot(snapshot);
       navigate('/explorer');
     } catch (err) {
@@ -53,6 +70,29 @@ export default function ConnectionHubPage() {
     setSaveError(null);
   };
 
+  const handleDbConnect = async (e) => {
+    e.preventDefault();
+    if (!connStr.trim()) return;
+    setConnecting(true);
+    setConnError(null);
+    try {
+      const { data } = await connectDb(connStr.trim());
+      const defaultName = `${data.connection?.name || connStr.replace(/:[^@]+@/, ':***@')} — ${new Date().toLocaleString()}`;
+      // Strip the connection object so enc/iv don't end up in snapshot_data JSONB
+      const { connection, ...snapshotPayload } = data;
+      setPendingData({ data: snapshotPayload, defaultName, connection });
+      setSnapshotName(defaultName);
+      setDescription('');
+      setSaveError(null);
+      setDbPanel(false);
+      setConnStr('');
+    } catch (err) {
+      setConnError(err.response?.data?.error || 'Connection failed');
+    } finally {
+      setConnecting(false);
+    }
+  };
+
   const handleCancel = () => {
     setPendingData(null);
     setSnapshotName('');
@@ -68,7 +108,7 @@ export default function ConnectionHubPage() {
           <h1>Upload Data</h1>
           <InfoModal
             title="Upload Data"
-            body="Upload one or more CSV, JSON, or Excel files. Drop multiple files at once to combine them into a single snapshot. Each Excel sheet becomes its own table."
+            body="Upload CSV, JSON, or Excel files — or connect directly to a PostgreSQL or MySQL database."
           />
         </div>
 
@@ -81,22 +121,16 @@ export default function ConnectionHubPage() {
           </div>
         )}
 
-        <div className="card" style={{ marginBottom: '1.5rem' }}>
-          <div className="card-title">
-            <span>Upload Files</span>
-            <InfoModal
-              title="Upload Files"
-              body="Drop one or multiple CSV, JSON, or Excel files. Multi-file drops are combined into one snapshot — great for loading related tables together."
-            />
-          </div>
-
-          {!pendingData ? (
-            <FileUploadForm onUpload={handleFileUpload} />
-          ) : (
+        {/* Save form — shown after a successful file upload or DB connection */}
+        {pendingData && (
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <div className="card-title">
+              <span>Save Snapshot</span>
+            </div>
             <div className="save-form">
               <div className="save-form-preview">
                 <span className="save-form-tables">
-                  {pendingData.data.tables?.length} table{pendingData.data.tables?.length !== 1 ? 's' : ''} parsed
+                  {pendingData.data.tables?.length} table{pendingData.data.tables?.length !== 1 ? 's' : ''} found
                 </span>
                 <span className="save-form-type">{pendingData.data.source_type}</span>
               </div>
@@ -129,8 +163,80 @@ export default function ConnectionHubPage() {
                 <button className="btn btn-ghost" onClick={handleCancel}>Cancel</button>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
+
+        {/* File upload card */}
+        {!pendingData && (
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <div className="card-title">
+              <span>Upload Files</span>
+              <InfoModal
+                title="Upload Files"
+                body="Drop one or multiple CSV, JSON, or Excel files. Multi-file drops are combined into one snapshot — great for loading related tables together."
+              />
+            </div>
+            <FileUploadForm onUpload={handleFileUpload} />
+          </div>
+        )}
+
+        {/* DB connection card */}
+        {!pendingData && (
+          <div className="card" style={{ marginBottom: '1.5rem' }}>
+            <div className="card-title">
+              <span>Connect to Database</span>
+              <InfoModal
+                title="Connect to Database"
+                body="Connect directly to a PostgreSQL or MySQL database. DataLens pulls the schema via information_schema and encrypts your connection string at rest."
+              />
+            </div>
+
+            {!dbPanel ? (
+              <button className="btn btn-secondary" onClick={() => setDbPanel(true)}>
+                Connect Database
+              </button>
+            ) : (
+              <form className="save-form" onSubmit={handleDbConnect}>
+                <div className="field">
+                  <label htmlFor="db-type">Database type</label>
+                  <select
+                    id="db-type"
+                    value={dbType}
+                    onChange={e => { setDbType(e.target.value); setConnStr(''); setConnError(null); }}
+                    style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.875rem' }}
+                  >
+                    <option value="postgres">PostgreSQL</option>
+                    <option value="mysql">MySQL</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label htmlFor="conn-str">Connection string</label>
+                  <input
+                    id="conn-str"
+                    type="password"
+                    value={connStr}
+                    onChange={e => { setConnStr(e.target.value); setConnError(null); }}
+                    placeholder={SOURCE_PLACEHOLDERS[dbType]}
+                    autoComplete="off"
+                    autoFocus
+                  />
+                  <span style={{ fontSize: '0.75rem', color: 'var(--color-text-dim)', marginTop: '0.25rem', display: 'block' }}>
+                    Your connection string is encrypted at rest and never exposed in API responses.
+                  </span>
+                </div>
+                {connError && <div className="alert alert-error">{connError}</div>}
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                  <button className="btn btn-primary" type="submit" disabled={!connStr.trim() || connecting}>
+                    {connecting ? 'Connecting…' : 'Test & Connect'}
+                  </button>
+                  <button className="btn btn-ghost" type="button" onClick={() => { setDbPanel(false); setConnStr(''); setConnError(null); }}>
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        )}
 
         <div className="card">
           <div className="card-title">

@@ -26,7 +26,7 @@ function parseCSV(buffer, filename) {
     last_modified: new Date().toISOString(),
     notes: '',
     columns,
-    sample_rows: result.data.slice(0, 10),
+    sample_rows: result.data.slice(0, 500),
   }];
 }
 
@@ -58,7 +58,7 @@ function parseExcel(buffer) {
       last_modified: new Date().toISOString(),
       notes: '',
       columns,
-      sample_rows: rows.slice(0, 10),
+      sample_rows: rows.slice(0, 500),
     });
   }
   return tables;

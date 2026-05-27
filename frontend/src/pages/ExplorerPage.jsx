@@ -8,6 +8,7 @@ import DataHealth from '../components/explorer/DataHealth';
 import AuditLog from '../components/explorer/AuditLog';
 import AiQuery from '../components/explorer/AiQuery';
 import SnapshotDiff from '../components/explorer/SnapshotDiff';
+import SqlQueryRunner from '../components/explorer/SqlQueryRunner';
 import { useSnapshot } from '../context/SnapshotContext';
 import { listSnapshots, getSnapshot } from '../api/snapshots';
 
@@ -18,6 +19,7 @@ const TABS = [
   { id: 'AI',     label: 'Ask AI', fullLabel: 'Ask AI' },
   { id: 'Diff',   label: 'Compare',fullLabel: 'Compare Snapshots' },
   { id: 'Audit',  label: 'Audit',  fullLabel: 'Audit Log' },
+  { id: 'Query',  label: 'Query',  fullLabel: 'SQL Query Runner' },
 ];
 
 const INFO = {
@@ -27,6 +29,7 @@ const INFO = {
   AI:     'Ask a question in plain English — DataLens writes the SQL based on your schema. Past queries are saved locally.',
   Diff:   'Compare this snapshot to another one to see added/removed tables, column changes, and row count differences.',
   Audit:  'A history of your activity — connections, loads, exports, and deletions.',
+  Query:  'Run SQL directly against a live database connection. Press ⌘↵ to execute. Export results to CSV.',
 };
 
 function exportSchemaMarkdown(mergedSnapshot) {
@@ -284,6 +287,7 @@ export default function ExplorerPage() {
               {activeTab === 'AI'     && <AiQuery />}
               {activeTab === 'Diff'   && <SnapshotDiff />}
               {activeTab === 'Audit'  && <AuditLog />}
+              {activeTab === 'Query'  && <SqlQueryRunner />}
             </div>
           </>
         )}

@@ -62,7 +62,7 @@ router.get('/:id/export', requireAuth, async (req, res, next) => {
 // POST /api/snapshots
 router.post('/', requireAuth, async (req, res, next) => {
   try {
-    const { name, description, source_type, snapshot_data } = req.body;
+    const { name, description, source_type, snapshot_data, connection_string_enc, connection_iv } = req.body;
     if (!name || !source_type || !snapshot_data) {
       return res.status(400).json({ error: 'name, source_type, and snapshot_data are required' });
     }
@@ -85,9 +85,10 @@ router.post('/', requireAuth, async (req, res, next) => {
 
     const hash = hashSnapshot(snapshot_data);
     const { rows: [snapshot] } = await pool.query(
-      `INSERT INTO snapshots (user_id, name, description, source_type, snapshot_data, hash)
-       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [req.userId, name, description || null, source_type, JSON.stringify(snapshot_data), hash]
+      `INSERT INTO snapshots (user_id, name, description, source_type, snapshot_data, hash, connection_string_enc, connection_iv)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      [req.userId, name, description || null, source_type, JSON.stringify(snapshot_data), hash,
+       connection_string_enc || null, connection_iv || null]
     );
 
     await pool.query(

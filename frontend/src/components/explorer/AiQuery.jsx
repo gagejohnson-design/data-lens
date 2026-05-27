@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
 import { useSnapshot } from '../../context/SnapshotContext';
 import { queryAi } from '../../api/ai';
+import { getSavedQueries, saveQuery, deleteQuery, clearAllQueries } from '../../api/queries';
 
 const EXAMPLES = [
   'Show me the top 10 customers by total order value',
@@ -9,24 +9,16 @@ const EXAMPLES = [
   'Which products have never been ordered?',
 ];
 
-const HISTORY_KEY = 'datalens_ai_history';
-const MAX_HISTORY = 15;
+// localStorage fallback used when backend is unreachable
+const LS_KEY = 'datalens_ai_history';
 
-function loadHistory() {
-  try { return JSON.parse(localStorage.getItem(HISTORY_KEY)) || []; }
+function lsLoad() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
   catch { return []; }
 }
 
-function saveHistory(entry) {
-  const prev = loadHistory();
-  const deduped = prev.filter(h => h.question !== entry.question);
-  const updated = [entry, ...deduped].slice(0, MAX_HISTORY);
-  localStorage.setItem(HISTORY_KEY, JSON.stringify(updated));
-  return updated;
-}
-
 function timeAgo(ts) {
-  const diff = Date.now() - ts;
+  const diff = Date.now() - new Date(ts).getTime();
   const m = Math.floor(diff / 60000);
   if (m < 1) return 'just now';
   if (m < 60) return `${m}m ago`;
@@ -41,14 +33,24 @@ export default function AiQuery() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [missingKey, setMissingKey] = useState(false);
-  const [quotaExceeded, setQuotaExceeded] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [history, setHistory] = useState(loadHistory);
+  const [history, setHistory] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [historyLoading, setHistoryLoading] = useState(false);
 
-  // Refresh history display when component mounts
-  useEffect(() => { setHistory(loadHistory()); }, []);
+  const loadHistory = useCallback(async () => {
+    setHistoryLoading(true);
+    try {
+      const { data } = await getSavedQueries();
+      setHistory(data);
+    } catch {
+      setHistory(lsLoad());
+    } finally {
+      setHistoryLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { loadHistory(); }, [loadHistory]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,18 +58,23 @@ export default function AiQuery() {
     setLoading(true);
     setError(null);
     setResult(null);
-    setMissingKey(false);
-    setQuotaExceeded(false);
     try {
       const snapshotIds = sessionSnapshots.map(s => s.id);
       const { data } = await queryAi(question, null, snapshotIds);
       setResult(data);
-      const updated = saveHistory({ question: data.question, sql: data.sql, ts: Date.now() });
-      setHistory(updated);
+
+      try {
+        const { data: saved } = await saveQuery(data.question, data.sql, snapshotIds);
+        setHistory(prev => [saved, ...prev.filter(h => h.question !== data.question)]);
+      } catch {
+        const entry = { question: data.question, sql: data.sql, created_at: new Date().toISOString() };
+        const prev = lsLoad().filter(h => h.question !== entry.question);
+        const updated = [entry, ...prev].slice(0, 50);
+        localStorage.setItem(LS_KEY, JSON.stringify(updated));
+        setHistory(updated);
+      }
     } catch (err) {
       const errData = err.response?.data;
-      if (errData?.missingKey) setMissingKey(true);
-      if (errData?.quotaExceeded) setQuotaExceeded(true);
       setError(errData?.error || 'Failed to generate query');
     } finally {
       setLoading(false);
@@ -87,8 +94,16 @@ export default function AiQuery() {
     setShowHistory(false);
   };
 
-  const clearHistory = () => {
-    localStorage.removeItem(HISTORY_KEY);
+  const handleDeleteEntry = async (e, entry) => {
+    e.stopPropagation();
+    if (entry.id) {
+      try { await deleteQuery(entry.id); } catch {}
+    }
+    setHistory(prev => prev.filter(h => h !== entry));
+  };
+
+  const handleClearAll = async () => {
+    try { await clearAllQueries(); } catch { localStorage.removeItem(LS_KEY); }
     setHistory([]);
   };
 
@@ -129,32 +144,38 @@ export default function AiQuery() {
         )}
       </form>
 
-      {showHistory && history.length > 0 && (
+      {showHistory && (
         <div className="ai-history">
           <div className="ai-history-header">
             <span className="ai-history-title">Recent queries</span>
-            <button className="btn btn-ghost btn-sm" onClick={clearHistory}>Clear</button>
+            <button className="btn btn-ghost btn-sm" onClick={handleClearAll}>Clear all</button>
           </div>
-          <ul className="ai-history-list">
-            {history.map((h, i) => (
-              <li key={i} className="ai-history-item" onClick={() => loadFromHistory(h)}>
-                <span className="ai-history-question">{h.question}</span>
-                <span className="ai-history-time">{timeAgo(h.ts)}</span>
-              </li>
-            ))}
-          </ul>
+          {historyLoading ? (
+            <p className="ai-history-empty">Loading…</p>
+          ) : history.length === 0 ? (
+            <p className="ai-history-empty">No saved queries yet.</p>
+          ) : (
+            <ul className="ai-history-list">
+              {history.map((h, i) => (
+                <li key={h.id || i} className="ai-history-item" onClick={() => loadFromHistory(h)}>
+                  <span className="ai-history-question">{h.question}</span>
+                  <span className="ai-history-time">{timeAgo(h.created_at || h.ts)}</span>
+                  <button
+                    className="ai-history-delete"
+                    onClick={(e) => handleDeleteEntry(e, h)}
+                    title="Remove"
+                    aria-label="Remove query"
+                  >×</button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 
       {error && (
         <div className="alert alert-error" style={{ marginTop: '1rem' }}>
           {error}
-          {missingKey && (
-            <> — <Link to="/settings" style={{ color: 'inherit', textDecoration: 'underline' }}>Add your Gemini API key in Settings</Link></>
-          )}
-          {quotaExceeded && (
-            <> — <a href="https://aistudio.google.com" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>Upgrade at Google AI Studio</a></>
-          )}
         </div>
       )}
 
@@ -168,7 +189,7 @@ export default function AiQuery() {
           </div>
           <pre className="ai-result-sql">{result.sql}</pre>
           <p className="ai-result-note">
-            Run this in your database client. DataLens doesn't store credentials, so it can't execute queries directly.
+            Copy this into the <strong>Query</strong> tab to run it against a live database connection, or paste it into your own database client.
           </p>
         </div>
       )}

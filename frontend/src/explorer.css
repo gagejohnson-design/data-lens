@@ -496,6 +496,20 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
+.ai-history-delete {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--color-text-dim);
+  padding: 0 0.2rem;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: color var(--transition), opacity var(--transition);
+}
+.ai-history-item:hover .ai-history-delete { opacity: 1; }
+.ai-history-delete:hover { color: var(--color-danger); }
 
 /* ── Null rate bar ── */
 .null-bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
@@ -847,4 +861,108 @@
   .schema-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--color-border); max-height: 200px; }
   .node-side-panel { width: 100%; border-left: none; border-top: 1px solid var(--color-border); }
   .map-wrapper { flex-direction: column; height: 60vh; }
+}
+
+/* ── SQL Query Runner ── */
+.sql-runner { display: flex; flex-direction: column; gap: 1.25rem; }
+.sql-runner-header h2 { font-size: 1.1rem; margin-bottom: 0.25rem; }
+.sql-runner-subtitle { font-size: 0.875rem; color: var(--color-text-muted); }
+
+.sql-runner-tables {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+}
+.sql-runner-tables-label { color: var(--color-text-dim); font-size: 0.75rem; }
+.sql-runner-table-chip {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  font-size: 0.78rem;
+  transition: border-color 0.15s;
+}
+.sql-runner-table-chip:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.sql-runner-tables-more { color: var(--color-text-dim); font-size: 0.75rem; }
+
+.sql-runner-form { display: flex; flex-direction: column; gap: 0.75rem; }
+.sql-runner-editor {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--color-text);
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+.sql-runner-editor:focus { outline: none; border-color: var(--color-primary); }
+.sql-runner-editor:disabled { opacity: 0.6; }
+
+.sql-runner-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.sql-runner-hint { font-size: 0.75rem; color: var(--color-text-dim); margin-left: auto; }
+
+.sql-runner-results { display: flex; flex-direction: column; gap: 0.5rem; }
+.sql-runner-results-header { display: flex; align-items: center; justify-content: space-between; }
+.sql-runner-results-count { font-size: 0.8rem; color: var(--color-text-dim); }
+.sql-runner-empty { font-size: 0.875rem; color: var(--color-text-muted); padding: 1rem 0; }
+
+.sql-runner-table-wrap {
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  max-height: 480px;
+}
+.sql-runner-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.sql-runner-table th {
+  background: var(--color-surface-raised);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.sql-runner-table td {
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+.sql-runner-table tr:last-child td { border-bottom: none; }
+.sql-runner-table tr:hover td { background: var(--color-surface-raised); }
+
+.null-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--mono);
+  color: var(--color-text-dim);
+  font-style: italic;
+}
+.sql-runner-note {
+  font-size: 0.8rem;
+  color: var(--color-text-dim);
+  padding: 0.4rem 0;
 }

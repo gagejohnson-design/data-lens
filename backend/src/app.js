@@ -6,10 +6,12 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./routers/auth');
 const usersRouter = require('./routers/users');
 const snapshotsRouter = require('./routers/snapshots');
-const connectRouter = require('./routers/connect');
+const { router: connectRouter } = require('./routers/connect');
 const auditRouter = require('./routers/audit');
 const shareRouter = require('./routers/share');
 const aiRouter = require('./routers/ai');
+const queryRouter = require('./routers/query');
+const savedQueriesRouter = require('./routers/saved_queries');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -31,6 +33,8 @@ app.use('/api/connect', connectRouter);
 app.use('/api/audit', auditRouter);
 app.use('/api/share', shareRouter);
 app.use('/api/ai', aiRouter);
+app.use('/api/query', queryRouter);
+app.use('/api/saved-queries', savedQueriesRouter);
 
 app.use((req, res) => res.status(404).json({ error: 'Not found' }));
 app.use(errorHandler);

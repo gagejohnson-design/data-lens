@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../components/common/NavBar';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
-import { updateMe, updatePassword, deleteAccount, getAiKeyStatus, saveAiKey } from '../api/users';
+import { updateMe, updatePassword, deleteAccount } from '../api/users';
 
 export default function AccountSettingsPage() {
   const { user, logout } = useAuth();
@@ -16,13 +16,6 @@ export default function AccountSettingsPage() {
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
-
-  const [aiKey, setAiKey] = useState('');
-  const [hasAiKey, setHasAiKey] = useState(false);
-
-  useEffect(() => {
-    getAiKeyStatus().then(({ data }) => setHasAiKey(data.hasKey)).catch(() => {});
-  }, []);
 
   const notify = (msg, isError = false) => {
     toast(msg, isError ? 'error' : 'success');
@@ -51,30 +44,6 @@ export default function AccountSettingsPage() {
       setNewPassword('');
     } catch (err) {
       notify(err.response?.data?.error || 'Password update failed', true);
-    }
-  };
-
-  const handleAiKeySave = async (e) => {
-    e.preventDefault();
-    if (!aiKey.trim()) return;
-    try {
-      const { data } = await saveAiKey(aiKey.trim());
-      setHasAiKey(data.hasKey);
-      setAiKey('');
-      notify('API key saved');
-    } catch (err) {
-      notify(err.response?.data?.error || 'Failed to save key', true);
-    }
-  };
-
-  const handleAiKeyClear = async () => {
-    if (!window.confirm('Remove your Gemini API key? AI queries will stop working until you add a new one.')) return;
-    try {
-      await saveAiKey(null);
-      setHasAiKey(false);
-      notify('API key removed');
-    } catch (err) {
-      notify(err.response?.data?.error || 'Failed to remove key', true);
     }
   };
 
@@ -128,50 +97,6 @@ export default function AccountSettingsPage() {
                 <input id="new-pass" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="••••••••" autoComplete="new-password" />
               </div>
               <button className="btn btn-primary" type="submit">Update Password</button>
-            </form>
-          </div>
-
-          <div className="card">
-            <h2 className="card-section-title">AI Integration</h2>
-            <p className="settings-desc">
-              DataLens uses Google Gemini to generate SQL from plain-English questions.
-              Get a free API key from{' '}
-              <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer">
-                Google AI Studio
-              </a>.
-            </p>
-            {hasAiKey && (
-              <div className="settings-key-status-row">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-                API key configured
-              </div>
-            )}
-            <form className="settings-form" onSubmit={handleAiKeySave} style={{ marginTop: '1rem' }}>
-              <div className="field">
-                <label htmlFor="ai-key">
-                  {hasAiKey ? 'Replace API Key' : 'Gemini API Key'}
-                </label>
-                <input
-                  id="ai-key"
-                  type="password"
-                  value={aiKey}
-                  onChange={(e) => setAiKey(e.target.value)}
-                  placeholder="AIza..."
-                  autoComplete="off"
-                />
-              </div>
-              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                <button className="btn btn-primary" type="submit" disabled={!aiKey.trim()}>
-                  Save Key
-                </button>
-                {hasAiKey && (
-                  <button className="btn btn-ghost" type="button" onClick={handleAiKeyClear}>
-                    Remove Key
-                  </button>
-                )}
-              </div>
             </form>
           </div>
 

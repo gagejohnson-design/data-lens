@@ -37,7 +37,7 @@ const FEATURES = [
       </svg>
     ),
     title: 'Ask AI',
-    desc: 'Describe what you want in plain English — DataLens writes the SQL based on your actual schema using Google Gemini.',
+    desc: 'Describe what you want in plain English — DataLens writes the SQL based on your actual schema using Claude AI.',
   },
   {
     icon: (

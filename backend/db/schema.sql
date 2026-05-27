@@ -1,4 +1,4 @@
--- DataLens Database Schema
+-- DataLens Database Schema (canonical fresh-install)
 
 CREATE TABLE IF NOT EXISTS users (
   id                     SERIAL PRIMARY KEY,
@@ -15,16 +15,18 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS snapshots (
-  id             SERIAL PRIMARY KEY,
-  user_id        INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  name           VARCHAR(255) NOT NULL,
-  description    TEXT,
-  source_type    VARCHAR(50) NOT NULL CHECK (source_type IN ('csv', 'json', 'mixed')),
-  snapshot_data  JSONB NOT NULL,
-  hash           TEXT NOT NULL,
-  share_token    UUID UNIQUE,
-  created_at     TIMESTAMP DEFAULT NOW(),
-  updated_at     TIMESTAMP DEFAULT NOW(),
+  id                     SERIAL PRIMARY KEY,
+  user_id                INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  name                   VARCHAR(255) NOT NULL,
+  description            TEXT,
+  source_type            VARCHAR(50) NOT NULL CHECK (source_type IN ('csv', 'json', 'mixed', 'postgres', 'mysql', 'sqlite')),
+  snapshot_data          JSONB NOT NULL,
+  hash                   TEXT NOT NULL,
+  share_token            UUID UNIQUE,
+  connection_string_enc  TEXT,
+  connection_iv          TEXT,
+  created_at             TIMESTAMP DEFAULT NOW(),
+  updated_at             TIMESTAMP DEFAULT NOW(),
   UNIQUE(user_id, name)
 );
 
@@ -35,3 +37,14 @@ CREATE TABLE IF NOT EXISTS audit_log (
   action       VARCHAR(50) NOT NULL CHECK (action IN ('connected', 'loaded_snapshot', 'deleted_snapshot', 'exported')),
   created_at   TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS saved_queries (
+  id           SERIAL PRIMARY KEY,
+  user_id      INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  question     TEXT NOT NULL,
+  sql          TEXT NOT NULL,
+  snapshot_ids INTEGER[] DEFAULT '{}',
+  created_at   TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS saved_queries_user_idx ON saved_queries(user_id);
